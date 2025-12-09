@@ -96,12 +96,18 @@
 
             get allTasks() {
                 return fetch(this.url)
+                   .then(response => {
+                    if (!response.ok) {alert(response.status);}
+                    })
                     .then(response => response.json())
                     .then(json => this.mapArray(json));
             },
 
             get notCompletedTasks() {
                 return fetch(this.url + "?completed=false")
+                   .then(response => {
+                    if (!response.ok) {alert(response.status);}
+                    })
                     .then(response => response.json())
                     .then(json => this.mapArray(json))
                     .catch(error => console.log(error.message));
@@ -112,6 +118,9 @@
                     method: "POST",
                     body: JSON.stringify({ title: task.text, completed: task.isDone })
                 })
+                    .then(response => {
+                    if (!response.ok) {alert(response.status);}
+                    })
                     .then(response => response.json())
                     .catch(error => console.log(error.message));
             },
@@ -121,6 +130,9 @@
                     method: "PUT",
                     body: JSON.stringify({ title: task.text, completed: task.isDone })
                 })
+                    .then(response => {
+                    if (!response.ok) {alert(response.status);}
+                    })
                     .then(response => response.json())
                     .catch(error => console.log(error.message));
             },
