@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task 04</title>
     <style>
-        .newTr, .newTd{
+        .tdStyle, .trStyle{
             border: 1px solid black;
+            
         }
     </style>
 </head>
@@ -23,7 +24,7 @@
     <script>
         let loadButton = document.querySelector("#loadTable");
         let tableDiv = document.querySelector("#divForTable");
-        let table = document.querySelector("tableID");
+        let table = document.querySelector("#tableID");
         let url = "https://jsonplaceholder.typicode.com/todos";
 
         loadButton.addEventListener("click", function(){
@@ -37,16 +38,24 @@
                 let newTr = document.createElement("tr");
                 newTr.classList.add("trStyle");
                 for (let i = 0; i < 4; i++){
-                    let newTd = createElement("td");
-                    newTd.classList.add("tdStyle");
-                    newTd[0].innerHTML = `${element.userId}`;
-                    newTd[1].innerHTML = `${element.id}`;
-                    newTd[2].innerHTML = `${element.title}`;
-                    newTd[3].innerHTML = `${element.completed}`;
-                    newTr.append(newTd);
-                }
-                table.append(newTr);
-            });
+                    let newTd1 = document.createElement("td");
+                    let newTd2 = document.createElement("td");
+                    let newTd3 = document.createElement("td");
+                    let newTd4 = document.createElement("td");
+
+                    newTd1.classList.add("tdStyle");
+                    newTd2.classList.add("tdStyle");
+                    newTd3.classList.add("tdStyle");
+                    newTd4.classList.add("tdStyle");
+
+                    newTd1.innerHTML = `${element.userId}`;
+                    newTd2.innerHTML = `${element.id}`;
+                    newTd3.innerHTML = `${element.title}`;
+                    newTd4.innerHTML = `${element.completed}`;
+
+                    newTr.append(newTd1, newTd2, newTd3, newTd4);
+                    table.append(newTr);
+                }});
         }
         /*
         Задание:
