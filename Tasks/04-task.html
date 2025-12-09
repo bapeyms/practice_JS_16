@@ -9,7 +9,19 @@
     <style>
         .tdStyle, .trStyle{
             border: 1px solid black;
-            
+        }
+        .completed{
+            content: '\2713';
+        }
+        .incompleted{
+            content: '\271D';
+        }
+        .display{
+            border: 1px solid black;
+            display: block;
+        }
+        .noDisplay{
+            display: none;
         }
     </style>
 </head>
@@ -18,13 +30,19 @@
     <button id="loadTable">Load A Table</button>
     <div id="divForTable">
         <table id="tableID">
-
+            <td class="noDisplay" id="firstRow">
+                <tr>User ID</tr>
+                <tr>ID</tr>
+                <tr>Title</tr>
+                <tr>Status</tr>
+            </td>
         </table>
     </div>
     <script>
         let loadButton = document.querySelector("#loadTable");
         let tableDiv = document.querySelector("#divForTable");
         let table = document.querySelector("#tableID");
+        let firstRowTable = document.querySelector("#firstRow");
         let url = "https://jsonplaceholder.typicode.com/todos";
 
         loadButton.addEventListener("click", function(){
@@ -34,28 +52,32 @@
         });
 
         function LoadOnTable(list){
+            firstRow.classList.add("display");
             list.forEach(element => {
                 let newTr = document.createElement("tr");
                 newTr.classList.add("trStyle");
-                for (let i = 0; i < 4; i++){
-                    let newTd1 = document.createElement("td");
-                    let newTd2 = document.createElement("td");
-                    let newTd3 = document.createElement("td");
-                    let newTd4 = document.createElement("td");
+                let newTd1 = document.createElement("td");
+                let newTd2 = document.createElement("td");
+                let newTd3 = document.createElement("td");
+                let newTd4 = document.createElement("td");
 
-                    newTd1.classList.add("tdStyle");
-                    newTd2.classList.add("tdStyle");
-                    newTd3.classList.add("tdStyle");
-                    newTd4.classList.add("tdStyle");
+                newTd1.classList.add("tdStyle");
+                newTd2.classList.add("tdStyle");
+                newTd3.classList.add("tdStyle");
+                newTd4.classList.add("tdStyle");
 
-                    newTd1.innerHTML = `${element.userId}`;
-                    newTd2.innerHTML = `${element.id}`;
-                    newTd3.innerHTML = `${element.title}`;
-                    newTd4.innerHTML = `${element.completed}`;
-
-                    newTr.append(newTd1, newTd2, newTd3, newTd4);
-                    table.append(newTr);
-                }});
+                newTd1.innerHTML = `${element.userId}`;
+                newTd2.innerHTML = `${element.id}`;
+                newTd3.innerHTML = `${element.title}`;
+                if (element.completed) {
+                    newTd4.classList.add("completed");
+                }
+                else {
+                    newTd4.classList.add("incompleted");
+                }
+                newTr.append(newTd1, newTd2, newTd3, newTd4);
+                table.append(newTr);
+            });
         }
         /*
         Задание:
