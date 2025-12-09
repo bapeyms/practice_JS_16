@@ -34,7 +34,8 @@
                     output.innerHTML += "<br>user id: " + json.userId;
                     output.innerHTML += "<br>title: " + json.title;
                     output.innerHTML += "<br>completed: " + json.completed;
-                });
+                })
+                .catch(error => console.log(error.message));
         });
     </script>
 </body>

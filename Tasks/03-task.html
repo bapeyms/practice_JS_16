@@ -9,7 +9,28 @@
 </head>
 
 <body>
+    <button id="showAllPhotos">Show All Photos</button>
+    <div id="photos">
+
+    </div>
     <script>
+        let buttonJS = document.querySelector("#showAllPhotos");
+        let photosJS = document.querySelector("#photos");
+
+        let urlForPhoto = "https://jsonplaceholder.typicode.com/photos";
+        buttonJS.addEventListener("click", function() {
+            fetch(urlForPhoto)
+            .then(response => response.json())
+            .then(json => ShowAllPhotos(json));
+        });
+
+        function ShowAllPhotos(list){
+            list.ForEach(element => {
+                let imgTag = document.querySelector("img");
+                img.src = element.url;
+                photosJS.append(imgTag);
+            })
+        }
         /*
         Задание:
         Напишите сценарий, который при загрузке страницы выполнит GET запрос на https://jsonplaceholder.typicode.com/photos
