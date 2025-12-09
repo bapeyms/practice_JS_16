@@ -6,10 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task 04</title>
+    <style>
+        .newTr, .newTd{
+            border: 1px solid black;
+        }
+    </style>
 </head>
 
 <body>
+    <button id="loadTable">Load A Table</button>
+    <div id="divForTable">
+        <table id="tableID">
+
+        </table>
+    </div>
     <script>
+        let loadButton = document.querySelector("#loadTable");
+        let tableDiv = document.querySelector("#divForTable");
+        let table = document.querySelector("tableID");
+        let url = "https://jsonplaceholder.typicode.com/todos";
+
+        loadButton.addEventListener("click", function(){
+            fetch(url)
+            .then(response => response.json())
+            .then(json => LoadOnTable(json));
+        });
+
+        function LoadOnTable(list){
+            list.forEach(element => {
+                let newTr = document.createElement("tr");
+                newTr.classList.add("trStyle");
+                for (let i = 0; i < 4; i++){
+                    let newTd = createElement("td");
+                    newTd.classList.add("tdStyle");
+                    newTd[0].innerHTML = `${element.userId}`;
+                    newTd[1].innerHTML = `${element.id}`;
+                    newTd[2].innerHTML = `${element.title}`;
+                    newTd[3].innerHTML = `${element.completed}`;
+                    newTr.append(newTd);
+                }
+                table.append(newTr);
+            });
+        }
         /*
         Задание:
         Напишите сценарий, который выполняет GET запрос по адресу https://jsonplaceholder.typicode.com/todos
