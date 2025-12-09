@@ -7,9 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task 02</title>
 </head>
-
 <body>
+    <button id="pushButton">Push Me</button>
     <script>
+        let buttonJS = document.querySelector("#pushButton");
+        buttonJS.addEventListener("click", function(){
+            let url = "";
+            let task = {
+                id: 1,
+                title: 'foo',
+                body: 'bar',
+                userId: 1
+            }
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(task),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+                .then((response) => response.json())
+                .then((json) => console.log(json));
+        })
         /*
         Задание:
         Напишите сценарий, который будет обновлять сущность post со свойствами
