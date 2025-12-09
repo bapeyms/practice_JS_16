@@ -103,7 +103,8 @@
             get notCompletedTasks() {
                 return fetch(this.url + "?completed=false")
                     .then(response => response.json())
-                    .then(json => this.mapArray(json));
+                    .then(json => this.mapArray(json))
+                    .catch(error => console.log(error.message));
             },
 
             add(task) {
@@ -111,7 +112,8 @@
                     method: "POST",
                     body: JSON.stringify({ title: task.text, completed: task.isDone })
                 })
-                    .then(response => response.json());
+                    .then(response => response.json())
+                    .catch(error => console.log(error.message));
             },
 
             update(task) {
@@ -119,7 +121,8 @@
                     method: "PUT",
                     body: JSON.stringify({ title: task.text, completed: task.isDone })
                 })
-                    .then(response => response.json());
+                    .then(response => response.json())
+                    .catch(error => console.log(error.message));
             },
 
             mapArray(array) {

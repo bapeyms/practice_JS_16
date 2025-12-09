@@ -10,18 +10,29 @@
         .tdStyle, .trStyle{
             border: 1px solid black;
         }
-        .completed{
+        .completed::before{
             content: '\2713';
+            color: green;
         }
-        .incompleted{
-            content: '\271D';
+        .incompleted::before{
+            content: '\2717';
+            color: red;
+        }
+        #tableID{
+            margin-top: 1em;
         }
         .display{
             border: 1px solid black;
+            width: 200px; height: auto;
             display: block;
         }
         .noDisplay{
             display: none;
+        }
+        td{
+            border: 1px solid black;
+            width: 200px; height: auto;
+            text-align: center;
         }
     </style>
 </head>
@@ -30,12 +41,12 @@
     <button id="loadTable">Load A Table</button>
     <div id="divForTable">
         <table id="tableID">
-            <td class="noDisplay" id="firstRow">
-                <tr>User ID</tr>
-                <tr>ID</tr>
-                <tr>Title</tr>
-                <tr>Status</tr>
-            </td>
+            <tr class="noDisplay" id="firstRow">
+                <td>User ID</td>
+                <td>ID</td>
+                <td>Title</td>
+                <td>Status</td>
+            </tr>
         </table>
     </div>
     <script>
@@ -52,7 +63,22 @@
         });
 
         function LoadOnTable(list){
-            firstRow.classList.add("display");
+            let firstRowTr = document.createElement("tr");
+            firstRowTr.classList.add("trStyle");
+            let firstRowTd1 = document.createElement("td");
+            firstRowTd1.textContent = "User ID";
+            firstRowTd1.classList.add("tdStyle");
+            let firstRowTd2 = document.createElement("td");
+            firstRowTd2.textContent = "ID";
+            firstRowTd2.classList.add("tdStyle");
+            let firstRowTd3 = document.createElement("td");
+            firstRowTd3.textContent = "Title";
+            firstRowTd3.classList.add("tdStyle");
+            let firstRowTd4 = document.createElement("td");
+            firstRowTd4.textContent = "Status";
+            firstRowTd4.classList.add("tdStyle");
+            firstRowTr.append(firstRowTd1, firstRowTd2, firstRowTd3, firstRowTd4);
+            table.append(firstRowTr);
             list.forEach(element => {
                 let newTr = document.createElement("tr");
                 newTr.classList.add("trStyle");
